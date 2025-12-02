@@ -13,7 +13,7 @@ for (const rangeRaw of rangesRaw) {
     });
 }
 
-/* const baseNumbersChecked: Set<number> = new Set(); */
+const baseNumbersChecked: Set<number> = new Set();
 let invalidSum = 0;
 
 const weirdNumberGenerator = (num: number): number => {
@@ -33,17 +33,16 @@ for (const range of ranges) {
     }
 
     while (true) {
-        // for some odd reason duplicates are ok in part 1
-        /* if (baseNumbersChecked.has(checkNumber)) {
+        if (baseNumbersChecked.has(checkNumber)) {
             checkNumber++;
             continue;
-        } */
+        }
         const generatedNumber = weirdNumberGenerator(checkNumber);
-        /* baseNumbersChecked.add(checkNumber); */
         checkNumber++;
         if (generatedNumber > range.end) break;
         if (generatedNumber < range.start) continue;
         console.log("invalid ID:", generatedNumber);
+        baseNumbersChecked.add(checkNumber - 1);
         invalidSum += generatedNumber;
     }
 }
